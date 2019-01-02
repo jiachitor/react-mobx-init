@@ -1,28 +1,24 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Fragment } from 'react'
+import { Provider } from 'mobx-react'
+import stores from 'stores'
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
-}
+import DevTools from 'mobx-react-devtools'
 
-export default App;
+import Routes from './routes'
+import logo from './logo.svg'
+import './App.scss'
+
+const App = () => (
+    <Fragment>
+        <Provider {...stores}>
+            <Routes />
+        </Provider>
+        {
+            process.env.NODE_ENV === 'development' ? (
+                <DevTools />
+            ) : null
+        }
+    </Fragment>
+)
+
+export default App
